@@ -26,17 +26,19 @@
 #include <errno.h>
 #endif
 
-#ifndef __cplusplus
 #ifdef HAVE_STDBOOL
 #include <stdbool.h>
 #else
-#ifndef bool
-typedef int bool;
-#define true    1
-#define false   0
-#endif /* bool */
-#endif /* HAVE_STDBOOL */
-#endif /* C++ */
+#if !defined(bool) && !defined(__cplusplus)
+#ifndef _Bool
+typedef signed char _Bool;
+#endif
+#define bool _Bool
+#define true 1
+#define false 0
+#define __bool_true_false_are_defined 1
+#endif
+#endif
 
 #ifndef INLINE
 #ifdef inline
