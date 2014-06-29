@@ -30,8 +30,8 @@
 #include <stdbool.h>
 #else
 #if !defined(bool) && !defined(__cplusplus)
-#ifndef _Bool
-typedef signed char _Bool;
+#if __STDC_VERSION__ < 199901L && __GNUC__ < 3 && !defined(__INTEL_COMPILER)
+typedef int _Bool;
 #endif
 #define bool _Bool
 #define true 1
