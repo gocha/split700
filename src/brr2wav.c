@@ -1,6 +1,6 @@
 /**
  * brr2wav.c: decodes snes brr into Microsft WAVE.
- * @author      gocha - http://gocha.s151.xrea.com/
+ * @author gocha <http://twitter.com/gochaism>
  */
 
 #define APP_NAME    "brr2wav"
@@ -9,8 +9,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <direct.h>
 #include "cbyteio.h"
+#include "cpath.h"
+
+#ifdef _MSC_VER
+#include <direct.h>
+#else
+#include <unistd.h>
+#define _chdir chdir
+#define _getcwd getcwd
+#endif
 
 static char g_baseName[PATH_MAX];
 static char g_fileName[PATH_MAX];
@@ -43,14 +51,13 @@ static INLINE int32 sclamp16 (int32 x)
 
 void setFileNameBase (const char *path)
 {
-    char drive[PATH_MAX];
-    char dir[PATH_MAX];
-    char fname[PATH_MAX];
-    char ext[PATH_MAX];
+	char absolute_path[PATH_MAX];
+	path_getabspath(path, absolute_path);
 
-    _splitpath(path, drive, dir, fname, ext);
-    _makepath(g_baseName, drive, dir, fname, NULL);
-    _makepath(g_fileName, NULL, NULL, fname, ext);
+	strcpy(g_baseName, absolute_path);
+	path_stripext(g_baseName);
+	strcpy(g_fileName, absolute_path);
+	path_basename(g_fileName);
 }
 
 #define SNES_BRRBLOCK_SIZE      9

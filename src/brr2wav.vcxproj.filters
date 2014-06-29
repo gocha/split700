@@ -23,5 +23,8 @@
     <ClInclude Include="cbyteio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="cpath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
