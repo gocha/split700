@@ -260,7 +260,6 @@ fin:
 void usage (void)
 {
     printf("%s %s: decodes snes brr into Microsoft WAVE.\n", APP_NAME, APP_VER);
-    puts("programmed by gocha - http://gocha.s151.xrea.com/");
     puts("if you want more features, you may want to use snesbrr.");
     puts("");
     puts("Options:");

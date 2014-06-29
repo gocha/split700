@@ -276,7 +276,6 @@ fin:
 void usage (void)
 {
     printf("%s %s: extracts brr samples from spc dump.\n", APP_NAME, APP_VER);
-    puts("programmed by gocha - http://gocha.s151.xrea.com/");
     puts("if you want to decode brr, try snesbrr. it's one of nice brr decoders.");
     puts("");
     puts("Options:");
