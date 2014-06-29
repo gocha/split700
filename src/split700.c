@@ -285,7 +285,7 @@ void usage (void)
     puts("      --least n     assume a brr sample has at least n blocks.");
     puts("  -L                add loop point info to output filename of the sample.");
     puts("  -M                add a simple header for addmusicM.");
-    puts("  -z  --allow-zero  ignore samples which starts from $0000.");
+    puts("  -z  --allow-zero  allow samples which starts from $0000.");
     puts("  -?  --help        display this help.");
 }
 
