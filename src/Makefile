@@ -5,20 +5,26 @@ CXX = g++
 CXXFLAGS = -O2 -Wall -DGSFOPT
 LDFLAGS = -lm
 TARGET = split700
-SRCS = $(TARGET).cpp
-OBJS := $(SRCS:.cpp=.o)
+SRCS = $(TARGET).c
+OBJS := $(SRCS:.c=.o)
+SRCS_BRR2WAV = brr2wav.c
+OBJS_BRR2WAV := $(SRCS_BRR2WAV:.c=.o)
 
-.PHONY: all clean
+.PHONY: all clean brr2wav
 .SUFFIXES: .c .cpp .o
 
-all: $(TARGET)
+all: $(TARGET) brr2wav
 
 $(TARGET): $(OBJS)
 	$(CC) -o $@ $(OBJS) $(LDFLAGS)
 
+brr2wav: $(OBJS_BRR2WAV)
+	$(CC) -o $@ $(OBJS_BRR2WAV) $(LDFLAGS)
+
 clean:
 	$(RM) $(TARGET)
 	$(RM) $(OBJS)
+	$(RM) $(OBJS_BRR2WAV)
 
 .c.o:
 	$(CC) $(CFLAGS) -o $@ -c $^
