@@ -7,12 +7,21 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
+#ifdef HAVE_STDBOOL
+#include <stdbool.h>
+#else
 #if !defined(bool) && !defined(__cplusplus)
-  typedef int bool;
-  #define true    1
-  #define false   0
-#endif /* !bool */
+#ifndef _Bool
+typedef signed char _Bool;
+#endif
+#define bool _Bool
+#define true 1
+#define false 0
+#define __bool_true_false_are_defined 1
+#endif
+#endif
 
 #ifndef byte
   typedef unsigned char byte;
@@ -20,31 +29,6 @@
 #ifndef sbyte
   typedef signed char sbyte;
 #endif /* !sbyte */
-
-#ifndef int8
-typedef signed   __int8  int8;
-#endif
-#ifndef int16
-typedef signed   __int16 int16;
-#endif
-#ifndef int32
-typedef signed   __int32 int32;
-#endif
-#ifndef int64
-typedef signed   __int64 int64;
-#endif
-#ifndef uint8
-typedef unsigned __int8  uint8;
-#endif
-#ifndef uint16
-typedef unsigned __int16 uint16;
-#endif
-#ifndef uint32
-typedef unsigned __int32 uint32;
-#endif
-#ifndef uint64
-typedef unsigned __int64 uint64;
-#endif
 
 #ifndef countof
   #define countof(a)    (sizeof(a) / sizeof(a[0]))

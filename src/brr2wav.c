@@ -24,27 +24,27 @@ static char g_baseName[PATH_MAX];
 static char g_fileName[PATH_MAX];
 static int  g_pitch = 0x1000;
 
-static INLINE int32 absolute (int32 x)
+static INLINE int32_t absolute (int32_t x)
 {
     return ((x < 0) ? -x : x);
 }
 
-static INLINE int32 sclip15 (int32 x)
+static INLINE int32_t sclip15 (int32_t x)
 {
     return ((x & 16384) ? (x | ~16383) : (x & 16383));
 }
 
-static INLINE int32 sclamp8 (int32 x)
+static INLINE int32_t sclamp8 (int32_t x)
 {
     return ((x > 127) ? 127 : (x < -128) ? -128 : x);
 }
 
-static INLINE int32 sclamp15 (int32 x)
+static INLINE int32_t sclamp15 (int32_t x)
 {
     return ((x > 16383) ? 16383 : (x < -16384) ? -16384 : x);
 }
 
-static INLINE int32 sclamp16 (int32 x)
+static INLINE int32_t sclamp16 (int32_t x)
 {
     return ((x > 32767) ? 32767 : (x < -32768) ? -32768 : x);
 }
@@ -68,9 +68,9 @@ bool brr2wav (const char *path)
     FILE *brrFile;
     FILE *wavFile = NULL;
     char wavPath[PATH_MAX];
-    int32 sampCount;
-    int32 prev[2];
-    int32 rate;
+    int32_t sampCount;
+    int32_t prev[2];
+    int32_t rate;
     size_t brrSize;
     bool addLoopInfo = false;
     int loopStart = 0;
@@ -136,13 +136,13 @@ bool brr2wav (const char *path)
     prev[0] = prev[1] = 0;
     sampCount = 0;
     while (true) {
-        uint8   brrBlock[SNES_BRRBLOCK_SIZE];
-        uint8   filter;
+        uint8_t brrBlock[SNES_BRRBLOCK_SIZE];
+        uint8_t filter;
         bool    lastBlock;
         bool    loop;
-        int32   out, S1, S2;
-        uint8   shift;
-        int8    sample1, sample2;
+        int32_t out, S1, S2;
+        uint8_t shift;
+        int8_t  sample1, sample2;
         bool    validHeader;
         int     i, nybble;
         byte    *compress = brrBlock;
@@ -153,7 +153,7 @@ bool brr2wav (const char *path)
             break;
         }
 
-        filter = (uint8) *compress++;
+        filter = (uint8_t) *compress++;
         lastBlock = filter & 1;
         loop = (filter & 2) != 0;
 
@@ -173,7 +173,7 @@ bool brr2wav (const char *path)
 
             for (nybble = 0; nybble < 2; nybble++)
             {
-                out = nybble ? (int32) sample2 : (int32) sample1;
+                out = nybble ? (int32_t) sample2 : (int32_t) sample1;
                 out = validHeader ? ((out << shift) >> 1) : (out & ~0x7FF);
 
                 switch (filter)
