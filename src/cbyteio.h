@@ -9,18 +9,23 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-#ifdef HAVE_STDBOOL
-#include <stdbool.h>
+#if HAVE_STDBOOL_H
+# include <stdbool.h>
 #else
-#if !defined(bool) && !defined(__cplusplus)
-#if __STDC_VERSION__ < 199901L && __GNUC__ < 3 && !defined(__INTEL_COMPILER)
-typedef int _Bool;
-#endif
-#define bool _Bool
-#define true 1
-#define false 0
-#define __bool_true_false_are_defined 1
-#endif
+# if !HAVE__BOOL
+#  ifdef __cplusplus
+typedef bool _Bool;
+#  elif _WIN32
+#   include <windows.h>
+#   define bool BOOL
+#  else
+typedef unsigned char _Bool;
+#   define bool _Bool
+#  endif
+# endif
+# define false 0
+# define true  1
+# define __bool_true_false_are_defined 1
 #endif
 
 #ifndef byte
