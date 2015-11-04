@@ -483,7 +483,7 @@ bool Split700::IsValidSample(const SPCFile & spc_file, uint8_t srcn) const
 		return false;
 	}
 
-	unsigned int num_of_chunks = sample.compressed_size() / SPCSampDir::BRR_CHUNK_SIZE;
+	unsigned int num_of_chunks = (unsigned int)(sample.compressed_size() / SPCSampDir::BRR_CHUNK_SIZE);
 	const int LEAST_NUM_OF_CHUNKS = 8;
 	const int LEAST_NUM_OF_CHUNKS_HARDER = 2; // test case: Dragon Quest III
 	if (num_of_chunks < LEAST_NUM_OF_CHUNKS) {

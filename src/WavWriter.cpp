@@ -92,7 +92,7 @@ bool WavWriter::WriteFile(const std::string & filename)
 	std::vector<uint8_t> data_chunk;
 	data_chunk.reserve(8 + samples.size() * 2);
 	write(data_chunk, "data", 4);
-	write32(data_chunk, samples.size() * 2);
+	write32(data_chunk, (uint32_t)(samples.size() * 2));
 	for (auto itr_sample = samples.begin(); itr_sample != samples.end(); ++itr_sample) {
 		int16_t sample = *itr_sample;
 		write16(data_chunk, sample);
@@ -118,7 +118,7 @@ bool WavWriter::WriteFile(const std::string & filename)
 		write32(smpl_chunk, 0);  // cue point ID
 		write32(smpl_chunk, 0);  // type (loop forward)
 		write32(smpl_chunk, loop_sample); // start sample #
-		write32(smpl_chunk, samples.size() / channels); // end sample #
+		write32(smpl_chunk, (uint32_t)samples.size() / channels); // end sample #
 		write32(smpl_chunk, 0);  // fraction
 		write32(smpl_chunk, 0);  // playcount
 	}

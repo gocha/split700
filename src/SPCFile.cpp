@@ -712,7 +712,7 @@ std::string SPCFile::XID6TicksToTimeString(uint32_t ticks, bool padding)
 
 	if (!padding) {
 		size_t len = strlen(str);
-		for (off_t i = len - 1; i >= 0; i--) {
+		for (off_t i = (off_t)(len - 1); i >= 0; i--) {
 			if (str[i] == '0') {
 				str[i] = '\0';
 			}
@@ -1280,7 +1280,7 @@ void SPCFile::ParseSampDir()
 {
 	uint16_t dir = dsp[0x5d] << 8;
 
-	unsigned int current_dir = dir;
+	size_t current_dir = dir;
 	for (samp_dir_length = 0; samp_dir_length < 256; samp_dir_length++) {
 		// address out of range
 		if (current_dir >= 0x10000) {
