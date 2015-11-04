@@ -26,19 +26,17 @@
 #include <errno.h>
 #endif
 
+#ifndef __cplusplus
 #ifdef HAVE_STDBOOL
 #include <stdbool.h>
 #else
-#if !defined(bool) && !defined(__cplusplus)
-#if __STDC_VERSION__ < 199901L && __GNUC__ < 3 && !defined(__INTEL_COMPILER)
-typedef int _Bool;
-#endif
-#define bool _Bool
-#define true 1
-#define false 0
-#define __bool_true_false_are_defined 1
-#endif
-#endif
+#ifndef bool
+typedef int bool;
+#define true    1
+#define false   0
+#endif /* bool */
+#endif /* HAVE_STDBOOL */
+#endif /* C++ */
 
 #ifndef INLINE
 #ifdef inline
@@ -113,7 +111,8 @@ static INLINE void path_basename(char *path)
 #ifdef _WIN32
 	PathStripPathA(path);
 #else
-	basename(path);
+	char * new_path = basename(path);
+	memmove(path, new_path, strlen(new_path) + 1);
 #endif
 }
 

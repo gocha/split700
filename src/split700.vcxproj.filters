@@ -15,16 +15,34 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="split700.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="cbyteio.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="cpath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SPCFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SPCSampDir.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="split700.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WavWriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="split700.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SPCFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SPCSampDir.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WavWriter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

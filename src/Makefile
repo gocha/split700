@@ -5,10 +5,10 @@ CXX = g++
 CXXFLAGS = -O2 -Wall -DGSFOPT
 LDFLAGS = -lm
 TARGET = split700
-SRCS = $(TARGET).c
-OBJS := $(SRCS:.c=.o)
-SRCS_BRR2WAV = brr2wav.c
-OBJS_BRR2WAV := $(SRCS_BRR2WAV:.c=.o)
+SRCS = split700.cpp SPCFile.cpp SPCSampDir.cpp
+OBJS := $(SRCS:.cpp=.o)
+SRCS_BRR2WAV = brr2wav.cpp SPCFile.cpp SPCSampDir.cpp
+OBJS_BRR2WAV := $(SRCS_BRR2WAV:.cpp=.o)
 
 .PHONY: all clean brr2wav
 .SUFFIXES: .c .cpp .o

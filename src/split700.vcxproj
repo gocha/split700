@@ -96,11 +96,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="split700.c" />
+    <ClCompile Include="SPCFile.cpp" />
+    <ClCompile Include="SPCSampDir.cpp" />
+    <ClCompile Include="split700.cpp" />
+    <ClCompile Include="WavWriter.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="cbyteio.h" />
     <ClInclude Include="cpath.h" />
+    <ClInclude Include="SPCFile.h" />
+    <ClInclude Include="SPCSampDir.h" />
+    <ClInclude Include="split700.h" />
+    <ClInclude Include="WavWriter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
