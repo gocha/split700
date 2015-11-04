@@ -107,7 +107,7 @@ bool brr2wav(const std::string & brr_filename, uint16_t pitch)
 			has_header = true;
 		}
 		else {
-			fprintf(stderr, "%s: warning: illegal length, skip first %d bytes.\n", brr_filename.c_str(), brr_filesize % 9);
+			fprintf(stderr, "%s: warning: illegal length, skip first %d bytes.\n", brr_filename.c_str(), (int)(brr_filesize % 9));
 		}
 
 		brr += brr_filesize % 9;
@@ -116,7 +116,7 @@ bool brr2wav(const std::string & brr_filename, uint16_t pitch)
 	}
 
 	default:
-		fprintf(stderr, "%s: warning: illegal length, skip first %d bytes.\n", brr_filename.c_str(), brr_filesize % 9);
+		fprintf(stderr, "%s: warning: illegal length, skip first %d bytes.\n", brr_filename.c_str(), (int)(brr_filesize % 9));
 		brr += brr_filesize % 9;
 		brr_size -= brr_filesize % 9;
 		break;

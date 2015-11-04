@@ -5,28 +5,11 @@
 
 #include "SPCSampDir.h"
 
-static inline int32_t absolute(int32_t x)
-{
-	return ((x < 0) ? -x : x);
-}
-
-static inline int32_t sclip15(int32_t x)
-{
+static inline int32_t sclip15(int32_t x) {
 	return ((x & 16384) ? (x | ~16383) : (x & 16383));
 }
 
-static inline int32_t sclamp8(int32_t x)
-{
-	return ((x > 127) ? 127 : (x < -128) ? -128 : x);
-}
-
-static inline int32_t sclamp15(int32_t x)
-{
-	return ((x > 16383) ? 16383 : (x < -16384) ? -16384 : x);
-}
-
-static inline int32_t sclamp16(int32_t x)
-{
+static inline int32_t sclamp16(int32_t x) {
 	return ((x > 32767) ? 32767 : (x < -32768) ? -32768 : x);
 }
 
@@ -65,7 +48,6 @@ void SPCSampDir::parse_brr(const uint8_t * brr, size_t available_size)
 		uint8_t flags = brr[brr_size];
 		bool chunk_end = (flags & 1) != 0;
 		bool chunk_loop = (flags & 2) != 0;
-		uint8_t filter = (flags >> 2) & 3;
 		uint8_t range = flags >> 4;
 
 		if (!chunk_end && range > 0x0c) {

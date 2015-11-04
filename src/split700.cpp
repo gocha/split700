@@ -315,9 +315,9 @@ void Split700::PrintSampList(const SPCSampDir samples[], const std::vector<uint8
 		uint8_t srcn = *itr_srcn;
 		const SPCSampDir & sample = samples[srcn];
 
-		printf("|$%02x  |$%04X |$%04X |$%04X |%5d |", srcn,
+		printf("|$%02x  |$%04X |$%04X |$%04X |%5u |", srcn,
 			sample.start_address, sample.loop_address, sample.end_address,
-			sample.compressed_size());
+			(unsigned int)sample.compressed_size());
 
 		if (sample.looped) {
 			if (sample.loop_address >= sample.start_address && sample.loop_address < sample.end_address) {
@@ -545,7 +545,7 @@ std::string Split700::GetSongTitle(const SPCFile & spc_file, const std::string &
 {
 	std::string title(filename);
 	if (spc_file.tags.count(SPCFile::XID6ItemId::XID6_SONG_NAME) != 0) {
-		std::string & song_name = spc_file.GetStringTag(SPCFile::XID6ItemId::XID6_SONG_NAME);
+		std::string song_name(spc_file.GetStringTag(SPCFile::XID6ItemId::XID6_SONG_NAME));
 		title = song_name + " (" + filename + ")";
 	}
 	return title;

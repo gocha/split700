@@ -1,13 +1,13 @@
 #!/bin/make
 CC = gcc
-CFLAGS = -O2 -Wall -DGSFOPT
+CFLAGS = -O2 -Wall -std=c99
 CXX = g++
-CXXFLAGS = -O2 -Wall -DGSFOPT
+CXXFLAGS = -O2 -Wall -std=c++11
 LDFLAGS = -lm
 TARGET = split700
-SRCS = split700.cpp SPCFile.cpp SPCSampDir.cpp
+SRCS = split700.cpp SPCFile.cpp SPCSampDir.cpp WavWriter.cpp
 OBJS := $(SRCS:.cpp=.o)
-SRCS_BRR2WAV = brr2wav.cpp SPCFile.cpp SPCSampDir.cpp
+SRCS_BRR2WAV = brr2wav.cpp SPCFile.cpp SPCSampDir.cpp WavWriter.cpp
 OBJS_BRR2WAV := $(SRCS_BRR2WAV:.cpp=.o)
 
 .PHONY: all clean brr2wav
@@ -16,10 +16,10 @@ OBJS_BRR2WAV := $(SRCS_BRR2WAV:.cpp=.o)
 all: $(TARGET) brr2wav
 
 $(TARGET): $(OBJS)
-	$(CC) -o $@ $(OBJS) $(LDFLAGS)
+	$(CXX) -o $@ $(OBJS) $(LDFLAGS)
 
 brr2wav: $(OBJS_BRR2WAV)
-	$(CC) -o $@ $(OBJS_BRR2WAV) $(LDFLAGS)
+	$(CXX) -o $@ $(OBJS_BRR2WAV) $(LDFLAGS)
 
 clean:
 	$(RM) $(TARGET)

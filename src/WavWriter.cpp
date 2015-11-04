@@ -1,15 +1,11 @@
 
 #include <stdint.h>
 
+#include <string>
 #include <vector>
 #include <iterator>
 
 #include "WavWriter.h"
-
-static void write8(std::vector<uint8_t> & data, uint8_t value)
-{
-	data.push_back(value);
-}
 
 static void write16(std::vector<uint8_t> & data, uint16_t value)
 {
