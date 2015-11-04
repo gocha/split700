@@ -20,6 +20,7 @@ Drag and drop SPC file(s) into split700.exe, and you will get BRR samples in the
 |`-n N`  |`--srcn N`     |Specify target sample number. (example: `--srcn "1, 2, $10-20"`) |
 |`-l`    |`--list`       |Display only voice list, with no file outputs.                   |
 |        |`--wav`        |Convert BRR samples to Microsoft WAVE files.                     |
+|        |`--pitch HEX`  |Specify sample rate for output WAVE file (0x1000 = 32000 Hz).    |
 |`-L`    |N/A            |Add loop point info to output filename of the sample.            |
 |`-M`    |N/A            |Add file header for addmusicM (i.e. export loop-point).          |
 |`-?`    |`--help`       |Display this help.                                               |

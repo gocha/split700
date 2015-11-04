@@ -41,10 +41,10 @@ public:
 	bool ExportLoopSamples(const std::string & spc_filename, const std::vector<uint8_t> & srcns, bool export_loop_point = false);
 	bool ExportLoopSamples(const SPCFile & spc_file, const std::string & base_path, bool export_loop_point = false);
 	bool ExportLoopSamples(const SPCFile & spc_file, const std::string & base_path, const std::vector<uint8_t> & srcns, bool export_loop_point = false);
-	bool ExportLoopSamplesAsWAV(const std::string & spc_filename);
-	bool ExportLoopSamplesAsWAV(const std::string & spc_filename, const std::vector<uint8_t> & srcns);
-	bool ExportLoopSamplesAsWAV(const SPCFile & spc_file, const std::string & base_path);
-	bool ExportLoopSamplesAsWAV(const SPCFile & spc_file, const std::string & base_path, const std::vector<uint8_t> & srcns);
+	bool ExportLoopSamplesAsWAV(const std::string & spc_filename, int32_t samplerate = 32000);
+	bool ExportLoopSamplesAsWAV(const std::string & spc_filename, const std::vector<uint8_t> & srcns, int32_t samplerate = 32000);
+	bool ExportLoopSamplesAsWAV(const SPCFile & spc_file, const std::string & base_path, int32_t samplerate = 32000);
+	bool ExportLoopSamplesAsWAV(const SPCFile & spc_file, const std::string & base_path, const std::vector<uint8_t> & srcns, int32_t samplerate = 32000);
 	bool PrintSPCInfo(const std::string & spc_filename);
 	bool PrintSPCInfo(const std::string & spc_filename, const std::vector<uint8_t> & srcns);
 	bool PrintSPCInfo(const SPCFile & spc_file, const std::string & title);

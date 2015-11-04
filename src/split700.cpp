@@ -167,7 +167,7 @@ bool Split700::ExportLoopSamples(const SPCFile & spc_file, const std::string & b
 	return true;
 }
 
-bool Split700::ExportLoopSamplesAsWAV(const std::string & spc_filename)
+bool Split700::ExportLoopSamplesAsWAV(const std::string & spc_filename, int32_t samplerate)
 {
 	SPCFile * spc_file_ptr = SPCFile::Load(spc_filename);
 	if (spc_file_ptr == NULL) {
@@ -181,12 +181,12 @@ bool Split700::ExportLoopSamplesAsWAV(const std::string & spc_filename)
 	std::string base_path(base_path_c);
 
 
-	bool result = ExportLoopSamplesAsWAV(*spc_file_ptr, base_path);
+	bool result = ExportLoopSamplesAsWAV(*spc_file_ptr, base_path, samplerate);
 	delete spc_file_ptr;
 	return result;
 }
 
-bool Split700::ExportLoopSamplesAsWAV(const std::string & spc_filename, const std::vector<uint8_t> & srcns)
+bool Split700::ExportLoopSamplesAsWAV(const std::string & spc_filename, const std::vector<uint8_t> & srcns, int32_t samplerate)
 {
 	SPCFile * spc_file_ptr = SPCFile::Load(spc_filename);
 	if (spc_file_ptr == NULL) {
@@ -200,18 +200,18 @@ bool Split700::ExportLoopSamplesAsWAV(const std::string & spc_filename, const st
 	std::string base_path(base_path_c);
 
 
-	bool result = ExportLoopSamplesAsWAV(*spc_file_ptr, base_path, srcns);
+	bool result = ExportLoopSamplesAsWAV(*spc_file_ptr, base_path, srcns, samplerate);
 	delete spc_file_ptr;
 	return result;
 }
 
-bool Split700::ExportLoopSamplesAsWAV(const SPCFile & spc_file, const std::string & base_path)
+bool Split700::ExportLoopSamplesAsWAV(const SPCFile & spc_file, const std::string & base_path, int32_t samplerate)
 {
 	std::vector<uint8_t> srcns(GetSampList(spc_file));
-	return ExportLoopSamplesAsWAV(spc_file, base_path, srcns);
+	return ExportLoopSamplesAsWAV(spc_file, base_path, srcns, samplerate);
 }
 
-bool Split700::ExportLoopSamplesAsWAV(const SPCFile & spc_file, const std::string & base_path, const std::vector<uint8_t> & srcns)
+bool Split700::ExportLoopSamplesAsWAV(const SPCFile & spc_file, const std::string & base_path, const std::vector<uint8_t> & srcns, int32_t samplerate)
 {
 	char pwd[PATH_MAX];
 	getcwd(pwd, PATH_MAX);
@@ -229,7 +229,7 @@ bool Split700::ExportLoopSamplesAsWAV(const SPCFile & spc_file, const std::strin
 		std::string wav_filename(GetExportFilename(spc_file, base_path, srcn, ".wav"));
 
 		WavWriter wave(SPCSampDir::decode_brr(&spc_file.ram[sample.start_address], sample.compressed_size()));
-		wave.samplerate = 32000;
+		wave.samplerate = samplerate;
 		wave.bitwidth = 16;
 		wave.channels = 1;
 		if (sample.looped) {
@@ -614,6 +614,9 @@ static void usage(const char * progname)
 	printf("`--wav`\n");
 	printf("  : Convert BRR samples to WAVE files.\n");
 	printf("\n");
+	printf("`--pitch HEX`\n");
+	printf("  : Specify sample rate for output WAVE file (0x1000 = 32000 Hz).\n");
+	printf("\n");
 	printf("`-L`\n");
 	printf("  : Add loop point info to output filename of the sample.\n");
 	printf("\n");
@@ -631,6 +634,10 @@ int main(int argc, char *argv[])
 	Split700ProcMode mode = SPLIT700_PROC_BRR;
 	bool export_loop_point = false;
 	std::vector<uint8_t> srcns;
+	int32_t wav_samplerate = 32000;
+
+	long l;
+	char * endptr = NULL;
 
 	if (argc >= 2 && (strcmp(argv[1], "-?") == 0 || strcmp(argv[1], "--help") == 0)) {
 		usage(argv[0]);
@@ -658,6 +665,24 @@ int main(int argc, char *argv[])
 		}
 		else if (strcmp(argv[argi], "--wav") == 0) {
 			mode = SPLIT700_PROC_WAV;
+		}
+		else if (strcmp(argv[argi], "--pitch") == 0) {
+			if (argc <= (argi + 1)) {
+				fprintf(stderr, "Error: Too few arguments for \"%s\"\n", argv[argi]);
+				return EXIT_FAILURE;
+			}
+
+			l = strtol(argv[argi + 1], &endptr, 16);
+			if (*endptr != '\0' || errno == ERANGE || l < 0) {
+				fprintf(stderr, "Error: Number format error (pitch must be hexadecimal) \"%s\"\n", argv[argi + 1]);
+				return EXIT_FAILURE;
+			}
+			if (l < 0 || l > 0x3fff) {
+				fprintf(stderr, "Error: Pitch out of range.\n");
+				return EXIT_FAILURE;
+			}
+			wav_samplerate = l * 32000 / 0x1000;
+			argi++;
 		}
 		else if (strcmp(argv[argi], "-n") == 0 || strcmp(argv[argi], "--srcn") == 0) {
 			if (argc <= (argi + 1)) {
@@ -724,10 +749,10 @@ int main(int argc, char *argv[])
 
 		case SPLIT700_PROC_WAV:
 			if (srcns.size() != 0) {
-				result = app.ExportLoopSamplesAsWAV(spc_filename, srcns);
+				result = app.ExportLoopSamplesAsWAV(spc_filename, srcns, wav_samplerate);
 			}
 			else {
-				result = app.ExportLoopSamplesAsWAV(spc_filename);
+				result = app.ExportLoopSamplesAsWAV(spc_filename, wav_samplerate);
 			}
 
 			if (!result) {
