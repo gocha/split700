@@ -3,6 +3,7 @@
 #define SPCSAMPDIR_H_INCLUDED
 
 #include <stdint.h>
+#include <cstddef>
 
 #include <vector>
 
