@@ -61,7 +61,7 @@ static INLINE const char *path_findbase(const char *path)
 #ifdef _WIN32
 	return PathFindFileNameA(path);
 #else
-	char *pslash;
+	const char *pslash;
 
 	if (path == NULL)
 	{
@@ -85,8 +85,8 @@ static INLINE const char *path_findext(const char *path)
 #ifdef _WIN32
 	return PathFindExtensionA(path);
 #else
-	char *pdot;
-	char *pslash;
+	const char *pdot;
+	const char *pslash;
 
 	if (path == NULL)
 	{
