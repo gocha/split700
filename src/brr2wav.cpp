@@ -157,7 +157,7 @@ static void usage(const char * progname)
 	printf("Usage\n");
 	printf("-----\n");
 	printf("\n");
-	printf("Syntax: `%s [options] [spc files]`\n", progname);
+	printf("Syntax: `%s [options] [brr file]`\n", progname);
 	printf("\n");
 
 	printf("### Options\n");
