@@ -4,12 +4,26 @@ environment:
   matrix:
   - generator: "Visual Studio 14"
     config: Release
+    arch: vs2015-x86
     APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
 
   - generator: "Visual Studio 14 Win64"
     config: Release
+    arch: vs2015-x64
     APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
 
 build_script:
   - cmake -G"%generator%" -H. -Bbuild
   - cmake --build build --config "%config%"
+
+after_build:
+  - ps: $env:gitrev = git describe --tags
+  - ps: $env:my_version = "$env:gitrev"
+  - set package_name=split700-%my_version%-%arch%
+  - copy build\%config%\split700.exe .
+  - copy build\%config%\brr2wav.exe .
+  - 7z a -mx9 %package_name%.7z README.md README_ja.md brr2wav.exe split700.exe LICENSE
+
+artifacts:
+  - path: $(package_name).7z
+    name: $(arch)
