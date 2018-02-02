@@ -11,5 +11,5 @@ environment:
     APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
 
 build_script:
-  - cmake "-G%GENERATOR%" -H. -B_builds
-  - cmake --build _builds --config "%CONFIG%"
+  - cmake -G"%generator%" -H. -Bbuild
+  - cmake --build build --config "%config%"
