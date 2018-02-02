@@ -12,6 +12,9 @@ environment:
     arch: vs2015-x64
     APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
 
+init:
+  - git config --global core.autocrlf true
+
 build_script:
   - cmake -G"%generator%" -H. -Bbuild
   - cmake --build build --config "%config%"
