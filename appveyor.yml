@@ -1,7 +1,17 @@
-image: Visual Studio 2015
+image: Visual Studio 2017
 
 environment:
   matrix:
+  - generator: "Visual Studio 15"
+    config: Release
+    arch: vs2017-x86
+    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+
+  - generator: "Visual Studio 15 Win64"
+    config: Release
+    arch: vs2017-x64
+    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+
   - generator: "Visual Studio 14"
     config: Release
     arch: vs2015-x86
