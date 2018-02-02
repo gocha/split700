@@ -1,0 +1,15 @@
+image: Visual Studio 2015
+
+environment:
+  matrix:
+  - generator: "Visual Studio 14"
+    config: Release
+    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+
+  - generator: "Visual Studio 14 Win64"
+    config: Release
+    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+
+build_script:
+  - cmake "-G%GENERATOR%" -H. -B_builds
+  - cmake --build _builds --config "%CONFIG%"
