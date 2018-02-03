@@ -4,8 +4,6 @@ project(split700 CXX)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-include_directories(include)
-
 if(MSVC)
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 
