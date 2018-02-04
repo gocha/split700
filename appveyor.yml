@@ -1,3 +1,5 @@
+version: "{build}"
+
 image: Visual Studio 2017
 
 environment:
@@ -23,7 +25,7 @@ environment:
     APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
 
 init:
-  - git config --global core.autocrlf true
+  - git config --global core.autocrlf input
 
 build_script:
   - cmake -G"%generator%" -H. -Bbuild
