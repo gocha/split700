@@ -1268,6 +1268,10 @@ std::map<std::string, std::string> SPCFile::ExportPSFTag(bool unofficial_tags) c
 					sprintf(s, "%d", GetIntegerTag(id));
 					psf_tags["loopcount"] = s;
 					break;
+
+				default:
+					// Unsupported tags, they will be lost.
+					break;
 				}
 			}
 		}
