@@ -29,7 +29,8 @@ init:
 
 build_script:
   - cmake -G"%generator%" -H. -Bbuild
-  - cmake --build build --config "%config%"
+  #- cmake --build build --config "%config%"
+  - msbuild build\split700.sln /t:build /p:Configuration="%config%" /m /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
 after_build:
   - ps: $env:gitrev = git describe --tags
