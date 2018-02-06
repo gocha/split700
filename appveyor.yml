@@ -37,8 +37,8 @@ after_build:
   - set package_name=split700-%my_version%-%arch%
   - copy build\%config%\split700.exe .
   - copy build\%config%\brr2wav.exe .
-  - 7z a -mx9 %package_name%.7z README.md README_ja.md brr2wav.exe split700.exe LICENSE
+  - 7z a %package_name%.zip README.md README_ja.md brr2wav.exe split700.exe LICENSE
 
 artifacts:
-  - path: $(package_name).7z
+  - path: $(package_name).zip
     name: $(arch)
