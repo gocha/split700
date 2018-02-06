@@ -19,6 +19,10 @@ if(MSVC)
             endif(${flag_var} MATCHES "/MD")
         endforeach(flag_var)
     endif()
+
+    # Allow for wildcards in command-line path arguments
+    # http://msdn.microsoft.com/en-us/library/8bch7bkk.aspx
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} setargv.obj")
 endif()
 
 
