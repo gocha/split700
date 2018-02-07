@@ -36,8 +36,8 @@ after_build:
   - ps: $env:gitrev = git describe --tags
   - ps: $env:my_version = "$env:gitrev"
   - set package_name=split700-%my_version%-%arch%
-  - copy build\%config%\split700.exe .
-  - copy build\%config%\brr2wav.exe .
+  - copy "build\%config%\split700.exe" .
+  - copy "build\%config%\brr2wav.exe" .
   - 7z a %package_name%.zip README.md README_ja.md brr2wav.exe split700.exe LICENSE
 
 artifacts:

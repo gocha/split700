@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(split700 CXX)
+project(split700 C CXX)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
