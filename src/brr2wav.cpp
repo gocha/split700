@@ -3,7 +3,6 @@
  * @author gocha <http://github.com/gocha>
  */
 
-
 #define NOMINMAX
 
 #include <stdio.h>
@@ -29,7 +28,7 @@
 #endif
 
 #define APP_NAME    "brr2wav"
-#define APP_VER     "[2015-11-04]"
+#define APP_VER     "[2016-07-20]"
 #define APP_URL     "http://github.com/gocha/split700"
 
 uint8_t * readfile(const std::string & filename)
@@ -157,7 +156,7 @@ static void usage(const char * progname)
 	printf("Usage\n");
 	printf("-----\n");
 	printf("\n");
-	printf("Syntax: `%s [options] [spc files]`\n", progname);
+	printf("Syntax: `%s [options] [brr file]`\n", progname);
 	printf("\n");
 
 	printf("### Options\n");
