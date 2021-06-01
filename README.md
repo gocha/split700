@@ -1,6 +1,6 @@
 split700
 ========
-[![Travis Build Status](https://travis-ci.org/gocha/split700.svg?branch=master)](https://travis-ci.org/gocha/split700) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/2styuijab21vtr07/branch/master?svg=true)](https://ci.appveyor.com/project/gocha/split700/branch/master)
+[![Travis Build Status](https://travis-ci.com/gocha/split700.svg?branch=master)](https://travis-ci.com/gocha/split700) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/2styuijab21vtr07/branch/master?svg=true)](https://ci.appveyor.com/project/gocha/split700/branch/master)
 
 Extracts BRR samples from SNES SPC700 format (*.spc)
 
